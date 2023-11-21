@@ -60,7 +60,7 @@ header {
   outline: none;
   color: rgb(143, 35, 8);
   border: none;
-  border-radius: 3px;
+  border-radius: 4px 14px 4px 14px;
 }
 
 .search-container input:focus {
@@ -100,15 +100,19 @@ header {
 }
 
 .div__contextCocktail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
   animation: reveal linear both;
   animation-timeline: view();
   animation-range: entry 20% cover 50%;
 }
 
-.img__drink {
-  border-radius: 4px;
-  height: auto;
-  margin-bottom: 32px;
+.div__contextCocktail img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 36px 4px 36px 4px;
 }
 
 @keyframes reveal {
