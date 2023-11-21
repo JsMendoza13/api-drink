@@ -50,7 +50,7 @@ export function ContextCocktail() {
                 <h2>{cocktail.strDrink}</h2>
                 <h3>Ingredients: 🥝</h3>
                 <ul> {renderIngredients()}</ul>
-                <h3>Get it ready: 🤩</h3>
+                <h3>Get it ready 🤩</h3>
                 <p>{cocktail.strInstructions}</p>
               </div>
             </div>

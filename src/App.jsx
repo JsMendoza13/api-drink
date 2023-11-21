@@ -10,7 +10,7 @@ function App() {
   const handleSearch = () => {
     if (userInput.trim() === "") {
       setSearchResult(
-        <h3 className="msg">El campo de búsqueda no puede estar vacío</h3>
+        <span className="msg">El campo de búsqueda no puede estar vacío</span>
       );
     } else {
       fetch(url + userInput)
