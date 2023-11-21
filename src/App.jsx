@@ -1,4 +1,26 @@
+import { useState } from "react";
+import { ContextCocktail } from "./components/ContextCocktail";
+
 function App() {
+  const [userInput, setUserInput] = useState("");
+  const [searchResult, setSearchResult] = useState("");
+  const url = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
+
+  const handleSearch = () => {
+    if (userInput.trim() === "") {
+      setSearchResult(
+        <h3 className="msg"> The input field cannot be empty</h3>
+      );
+    } else {
+      fetch(url + userInput)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => console.error("Error en la solicitud:", error));
+    }
+  };
+
   return (
     <>
       <header>
@@ -9,33 +31,47 @@ function App() {
               type="text"
               placeholder="Encuentra tu bebida..."
               id="search-inp"
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
             />
-            <button id="btn-search">Buscar</button>
+            <button id="btn-search" onClick={handleSearch}>
+              Buscar
+            </button>
           </div>
         </div>
       </header>
-      <section>
-        <img
-          src="https://images.pexels.com/photos/18988864/pexels-photo-18988864/free-photo-of-house-in-green-deep-forest.jpeg"
-          alt=""
-        />
-        <img
-          src="https://images.pexels.com/photos/18800027/pexels-photo-18800027/free-photo-of-water-cascading-down-rock-in-forest.jpeg"
-          alt=""
-        />
-        <img
-          src="https://images.pexels.com/photos/8836252/pexels-photo-8836252.jpeg"
-          alt=""
-        />
-        <img
-          src="https://images.pexels.com/photos/19058510/pexels-photo-19058510/free-photo-of-flowers-on-meadow.jpeg"
-          alt=""
-        />
-        <img
-          src="https://images.pexels.com/photos/19164855/pexels-photo-19164855/free-photo-of-a-close-up-of-a-green-leaf-on-a-tree.jpeg"
-          alt=""
-        />
-        <img src="" alt="" />
+      <section className="section__cocktail">
+        <div id="result">{searchResult}</div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
+        <div className="div__contextCocktail">
+          <ContextCocktail />
+        </div>
       </section>
     </>
   );
