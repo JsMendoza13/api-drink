@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ContextCocktail } from "./components/ContextCocktail";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
   };
 
   useEffect(() => {
-    // Coloca aquí la lógica para obtener datos y crear los cócteles
+    // lógica para obtener datos y crear los cócteles
     const generateContextCocktails = () => {
       const numberOfContextCocktails = 10;
       return Array.from({ length: numberOfContextCocktails }, (_, index) => (
@@ -36,7 +36,7 @@ function App() {
 
     const newContextCocktails = generateContextCocktails();
     setContextCocktails(newContextCocktails);
-  }, []); // El array vacío como segundo argumento asegura que este efecto solo se ejecute una vez al montar el componente
+  }, []); // El array vacío este argumento asegura que este efecto solo se ejecute una vez al montar el componente
 
   return (
     <>
