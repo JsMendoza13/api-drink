@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <header>
-        <h1 className="nav__title">Api Cocktails 🍷</h1>
+        <h1 className="nav__title">API Cocktails 🍷</h1>
         <div>
           <div className="search-container">
             <input

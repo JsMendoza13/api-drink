@@ -8,6 +8,23 @@
 
 body {
   background: rgb(19, 19, 19);
+  padding-bottom: 20rem;
+}
+
+/* Scrollbar */
+
+body::-webkit-scrollbar {
+  background: #2a2a2b5b;
+  width: 12px;
+}
+
+body::-webkit-scrollbar-button {
+  display: none;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgb(44, 44, 44);
+  border-radius: 20px;
 }
 
 header {
@@ -19,10 +36,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
-  animation: enhance-header linear;
-  animation-timeline: scroll(root block);
-  animation-range-end: 0 150px;
+  animation: enhance-header linear both;
+  animation-timeline: scroll(root);
+  animation-range: 0 150px;
+  z-index: 1;
 }
 
 .nav__title {
@@ -68,7 +85,7 @@ header {
 
 @keyframes enhance-title {
   to {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -82,20 +99,28 @@ header {
   }
 }
 
-.section__cocktail {
-  columns: 2;
-  margin: 0 auto;
-  max-width: 80vw;
-  justify-content: center;
-}
-
 .div__contextCocktail {
-  margin: 0 0 2rem 0;
+  animation: reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 20% cover 50%;
 }
 
-section img {
+.img__drink {
   border-radius: 4px;
-  width: 100%;
   height: auto;
   margin-bottom: 32px;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 100%;
+    scale: 0.5;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
 }

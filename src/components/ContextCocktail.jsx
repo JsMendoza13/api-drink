@@ -38,8 +38,8 @@ export function ContextCocktail() {
     <>
       <section id="drink-section">
         {drinks.map((drink) => (
-          <div key={drink.id} className="div__img__drink">
-            <img src={drink.image} alt={drink.name} />
+          <div key={drink.id}>
+            <img src={drink.image} alt={drink.name} className="img__drink" />
           </div>
         ))}
       </section>
