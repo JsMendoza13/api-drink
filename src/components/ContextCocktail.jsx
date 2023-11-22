@@ -48,10 +48,12 @@ export function ContextCocktail() {
             <div className="overlay">
               <div className="overlay__cocktail_info">
                 <h2>{cocktail.strDrink}</h2>
-                <h3>Ingredients: 🥝</h3>
-                <ul> {renderIngredients()}</ul>
-                <h3>Get it ready 🤩</h3>
-                <p>{cocktail.strInstructions}</p>
+                <div className="div__cocktail__ingre">
+                  <h3>Ingredients: 🥝</h3>
+                  <ul> {renderIngredients()}</ul>
+                  <h3>Get it ready 🤩</h3>
+                  <p>{cocktail.strInstructions}</p>
+                </div>
               </div>
             </div>
           </div>

@@ -9,7 +9,6 @@
 body {
   background: rgb(19, 19, 19);
   padding-bottom: 20rem;
-
   font-family: "Poppins", sans-serif;
 }
 
@@ -48,9 +47,33 @@ header {
   color: whitesmoke;
   font-size: 2rem;
   margin: 0;
+  text-decoration: none;
   font-weight: 400;
   animation: enhance-title linear;
   animation-timeline: scroll(root block);
+}
+
+.msg {
+  color: rgb(252, 175, 156);
+  font-size: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  animation: fadeOut 1.4s forwards infinite;
+}
+
+/* Define la animación */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    color: rgb(255, 98, 59);
+  }
 }
 
 .search-container input {
@@ -130,6 +153,11 @@ header {
   gap: 20px;
 }
 
+.div__cocktail__ingre {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
 h2 {
   font-size: 3rem;
   text-align: center;
@@ -187,11 +215,6 @@ p {
   opacity: 1;
 }
 
-a:hover,
-a.active {
-  color: #fca084;
-}
-
 @keyframes reveal {
   from {
     opacity: 0;
@@ -206,11 +229,74 @@ a.active {
   }
 }
 
-@media screen and (max-width: 480px) {
+/*Style Button Up*/
+
+.RiArrowUpCircleFill {
+  background-color: #cc9f75;
+  border-radius: 15px;
+  color: #01041b;
+  cursor: pointer;
+  position: fixed;
+  bottom: 50px;
+  right: 15px;
+  height: 35px;
+  width: 35px;
+  transition: transform 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.RiGithubFill {
+  background-color: #cc9f75;
+  color: #01041b;
+  border-radius: 45%;
+  border: none;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  position: fixed;
+  bottom: 100px;
+  right: 15px;
+  transition: transform 0.2s ease-in-out;
+  z-index: 1;
+}
+
+.RiArrowUpCircleFill:hover,
+.RiGithubFill:hover {
+  transform: scale(1.1);
+  background-color: beige;
+}
+
+/*End style Button Up*/
+
+@media screen and (max-width: 780px) {
+  header {
+    padding: 8px;
+    margin: 0;
+    margin-bottom: 40px;
+  }
+
+  .nav__title {
+    font-size: 1.5rem;
+  }
+  h2 {
+    color: rgb(37, 37, 37);
+  }
+
+  .overlay__cocktail_info {
+    position: relative;
+    bottom: auto;
+    padding: 0px;
+    gap: 10px;
+  }
+  .div__cocktail__ingre {
+    max-height: 520px;
+  }
+}
+
+@media screen and (max-width: 580px) {
   header {
     display: block;
     padding: 0;
-    margin: 0;
   }
 
   @keyframes enhance-header {
@@ -231,7 +317,6 @@ a.active {
 
   .search-container button {
     margin-top: 10px;
-
     margin-left: 70%;
   }
   .div__contextCocktail {
@@ -245,16 +330,12 @@ a.active {
     animation: none;
   }
 
-  .overlay__cocktail_info {
-    position: relative;
-    bottom: auto;
-    padding: 0px;
-    gap: 10px;
+  .div__cocktail__ingre {
+    max-height: 250px;
   }
 
   h2 {
     font-size: 27px;
-    color: rgb(37, 37, 37);
   }
 
   h3 {
@@ -266,6 +347,12 @@ a.active {
   }
 
   p {
-    display: none;
+    font-size: 15px;
+  }
+
+  .msg {
+    font-weight: 400;
+    font-size: 17px;
+    height: 60vh;
   }
 }
