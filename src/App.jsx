@@ -15,11 +15,13 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  //Se genera una funcion para guardar una key una en la Api
+  //Se genera una funcion una clave unica en el array de keys
   const generateUniqueKey = () => {
     return new Date().getTime().toString();
   };
 
+  //funcion para traer los ingredientes, clasificarlos para no mostrar
+  //los null
   const createIngredients = (myDrink) => {
     const ingredients = [];
     let count = 1;
@@ -44,10 +46,13 @@ function App() {
     return ingredients;
   };
 
+  //metodo handle para la busqueda de un coctel
   const handleSearch = () => {
     if (userInput.trim() === "") {
+      //se limpian resultados si es que existen
       setContextCocktails([]);
       setSearchResult([]);
+      //y si el campo esta vacio se lanza un mensaje
       setErrorSearch(
         <span className="msg">You must write the name of a cocktail...</span>
       );
@@ -57,12 +62,14 @@ function App() {
       //     window.location.reload();
       //   }, 4000);
     } else {
+      //al buscar se muestra el loading
       setLoading(true);
       // Limpiar los cocteles antes de realizar la nueva búsqueda
       setContextCocktails([]);
       setSearchResult([]);
       setErrorSearch([]);
 
+      //funcion para cargar la busqueda del pues de un setTimeout
       const timeoutId = setTimeout(() => {
         fetch(url + userInput)
           .then((response) => response.json())
@@ -70,6 +77,7 @@ function App() {
             const myDrink = data.drinks[0];
             const ingredients = createIngredients(myDrink);
 
+            //Se crea el resultado de la busqueda en un div con sus elementos
             setSearchResult(
               <>
                 <div className="div__search_card">
@@ -95,6 +103,7 @@ function App() {
               </>
             );
           })
+          //se muestra un error, si algo sale mal
           .catch((error) => {
             console.error("Error in the application:", error);
             setErrorSearch(
@@ -103,11 +112,12 @@ function App() {
               </span>
             );
           })
+          //al finalizar de cargar lo anterior se ciera el loading
           .finally(() => {
             clearTimeout(timeoutId);
             setLoading(false);
           });
-      }, 1500);
+      }, 1500); //tiempo que dura el loading
     }
   };
 
@@ -115,26 +125,29 @@ function App() {
     const usedKeys = new Set(); //En esta variable se guardan las Key que se estan usando de la API
 
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true); //al cargar la web se muestra el loading
 
+      // se crea un try catch oara generar 10 elementos
       try {
         const numberOfContextCocktails = 10;
+        //Aqui se realizan varias peticiones asincronas para esperar que sean devuelta antes de continuar
         const newContextCocktails = await Promise.all(
           Array.from({ length: numberOfContextCocktails }, async () => {
             let newKey = generateUniqueKey();
 
             while (usedKeys.has(newKey)) {
+              //si se encuentra un id repetido entre los que trae se busca otro diferente y se guarda en el array
               newKey = generateUniqueKey();
             }
 
             usedKeys.add(newKey);
 
             try {
-              const cocktailResponse = await fetch(urlRandom);
-              const cocktailData = await cocktailResponse.json();
-              const myDrink = cocktailData.drinks[0];
-              const ingredients = createIngredients(myDrink);
-              // Aquí puedes pasar la información del cocktail como prop si es necesario
+              const cocktailResponse = await fetch(urlRandom); //se hace la peticion a la api por medio de la url
+              const cocktailData = await cocktailResponse.json(); //se analiza y extrae la informacion del json que se consulta
+              const myDrink = cocktailData.drinks[0]; // se toma el primer elemento
+              const ingredients = createIngredients(myDrink); //se llama a la funcion de ingredientes
+              //se genera el div con los resultados
               return (
                 <div key={newKey} className="div__contextCocktail">
                   <div className="div__SearchCocktail">
@@ -158,22 +171,23 @@ function App() {
                 </div>
               );
             } catch (error) {
+              //se atrapa el error si ocurre
               console.error("Error fetching cocktail:", error);
-              // Puedes decidir qué hacer en caso de error, como mostrar un mensaje de error.
+
               return null;
             }
           })
         );
 
-        setContextCocktails(newContextCocktails);
+        setContextCocktails(newContextCocktails); //del estado useState se muestra la peticion anterior
       } finally {
-        setLoading(false);
+        setLoading(false); //se cierra el loading
       }
     };
 
     const timeoutId = setTimeout(() => {
-      fetchData();
-    }, 1850);
+      fetchData(); //Aqui se llama la funcion donde se esta realizando operaciones asincronas en la api
+    }, 1850); //tiempo del loading
 
     return () => clearTimeout(timeoutId);
   }, []); // El array vacío este argumento asegura que este efecto solo se ejecute una vez al montar el componente
