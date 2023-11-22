@@ -4,6 +4,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -231,14 +232,13 @@ p {
 
 /*Style Button Up*/
 
-.RiArrowUpCircleFill {
-  background-color: #cc9f75;
+.RiArrowUpCircleFill,
+.RiGithubFill {
+  background-color: #db883a;
   border-radius: 15px;
   color: #01041b;
   cursor: pointer;
-  position: fixed;
-  bottom: 50px;
-  right: 15px;
+  margin-left: 95%;
   height: 35px;
   width: 35px;
   transition: transform 0.2s ease-in-out;
@@ -246,18 +246,7 @@ p {
 }
 
 .RiGithubFill {
-  background-color: #cc9f75;
-  color: #01041b;
-  border-radius: 45%;
-  border: none;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  position: fixed;
-  bottom: 100px;
-  right: 15px;
-  transition: transform 0.2s ease-in-out;
-  z-index: 1;
+  margin-bottom: 10px;
 }
 
 .RiArrowUpCircleFill:hover,
@@ -290,6 +279,20 @@ p {
   }
   .div__cocktail__ingre {
     max-height: 520px;
+  }
+
+  footer {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 20px;
+    gap: 20px;
+    float: right;
+  }
+
+  .RiArrowUpCircleFill,
+  .RiGithubFill {
+    margin: 10px 0;
   }
 }
 

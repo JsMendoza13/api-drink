@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ContextCocktail } from "./components/ContextCocktail";
-import { ButtonUp } from "./components/ButtonUp";
+
+import { RiArrowUpCircleFill, RiGithubFill } from "react-icons/ri";
 
 function App() {
   const [userInput, setUserInput] = useState("");
@@ -8,6 +9,10 @@ function App() {
   const [contextCocktails, setContextCocktails] = useState([]);
 
   const url = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   //Se genera una funcion para guardar una key una en la Api
   const generateUniqueKey = () => {
@@ -68,7 +73,6 @@ function App() {
 
   return (
     <>
-      <ButtonUp />
       <header>
         <a className="nav__title" href="/">
           API Cocktails 🍷
@@ -92,6 +96,18 @@ function App() {
         <div id="result"></div>
         {contextCocktails}
       </section>
+      <footer>
+        <a
+          href="https://github.com/JsMendoza13"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <RiGithubFill className="RiGithubFill" />
+        </a>
+        <a href="#" onClick={handleScrollToTop}>
+          <RiArrowUpCircleFill className="RiArrowUpCircleFill" />
+        </a>
+      </footer>
     </>
   );
 }
