@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { ContextCocktail } from "./components/ContextCocktail";
-
 import { RiArrowUpCircleFill, RiGithubFill } from "react-icons/ri";
 
 function App() {
   const [userInput, setUserInput] = useState("");
   const [searchResult, setSearchResult] = useState("");
+  const [errorSearch, setErrorSearch] = useState("");
   const [contextCocktails, setContextCocktails] = useState([]);
-
   const url = "https://thecocktaildb.com/api/json/v1/1/search.php?s=";
-
+  //funcion de scroll del btn flecha del footer
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -22,20 +21,68 @@ function App() {
   const handleSearch = () => {
     if (userInput.trim() === "") {
       setContextCocktails([]);
-      setSearchResult("You must write the name of a cocktail...");
+      setSearchResult([]);
+      setErrorSearch(
+        <span className="msg">You must write the name of a cocktail...</span>
+      );
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 4000);
+      //al dar click al btn buscar se recarga la pagina a los 4s
+      //  setTimeout(() => {
+      //     window.location.reload();
+      //   }, 4000);
     } else {
       // Limpiar los cocteles antes de realizar la nueva búsqueda
       setContextCocktails([]);
-
+      setSearchResult([]);
+      setErrorSearch([]);
       fetch(url + userInput)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
-          // Puedes manejar los resultados de la API aquí y actualizar setSearchResult
+          const myDrink = data.drinks[0];
+
+          const ingredients = [];
+          let count = 1;
+
+          for (let i in myDrink) {
+            let ingredient = "";
+            let measure = "";
+
+            if (i.startsWith("strIngredient") && myDrink[i]) {
+              ingredient = myDrink[i];
+
+              if (myDrink[`strMeasure${count}`]) {
+                measure = myDrink[`strMeasure${count}`];
+              } else {
+                measure = "";
+              }
+              count += 1;
+              ingredients.push(`${measure} ${ingredient}`);
+            }
+          }
+          setSearchResult(
+            <>
+              <div className="div__search_card">
+                <div className="div__SearchCocktail">
+                  <img src={myDrink.strDrinkThumb} alt={myDrink.strDrink} />
+                  <div className="overlay">
+                    <div className="overlay__cocktail_info">
+                      <h2>{myDrink.strDrink}</h2>
+                      <div className="div__cocktail__ingre">
+                        <h3>Ingredients: 🥝</h3>
+                        <ul>
+                          {ingredients.map((ingredient, index) => (
+                            <li key={index}>{ingredient}</li>
+                          ))}
+                        </ul>
+                        <h3>Get it ready 🤩</h3>
+                        <p>{myDrink.strInstructions}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          );
         })
         .catch((error) => {
           console.error("Error in the application:", error);
@@ -91,10 +138,10 @@ function App() {
           </button>
         </div>
       </header>
-      {searchResult && <span className="msg">{searchResult}</span>}
       <section className="section__cocktail">
-        <div id="result"></div>
+        <div id="result">{searchResult}</div>
         {contextCocktails}
+        {errorSearch}
       </section>
       <footer>
         <a

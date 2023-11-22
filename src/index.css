@@ -90,6 +90,7 @@ header {
 
 .search-container input:focus {
   color: rgb(221, 49, 6);
+  font-weight: 500;
 }
 
 .search-container button {
@@ -124,7 +125,8 @@ header {
   }
 }
 
-.div__contextCocktail {
+.div__contextCocktail,
+.div__search_card {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -134,12 +136,23 @@ header {
   animation-range: entry 20% cover 50%;
 }
 
+.div__search_card {
+  margin: 30px 0;
+}
+
+.div__SearchCocktail img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 46px 4px 46px 4px;
+}
+
 .div__contextCocktail img {
   max-width: 100%;
   max-height: 100%;
   border-radius: 46px 4px 46px 4px;
 }
 
+.div__SearchCocktail,
 .div__cocktail__card {
   position: relative;
   flex-direction: column;
@@ -206,7 +219,6 @@ p {
   );
   border-radius: 46px 4px 46px 4px;
   z-index: 1;
-
   opacity: 0;
   padding: 20px 40px;
   transition: all 0.4s ease-in-out;
@@ -264,6 +276,10 @@ p {
     margin-bottom: 40px;
   }
 
+  .div__search_card {
+    margin: 30px;
+  }
+
   .nav__title {
     font-size: 1.5rem;
   }
@@ -278,7 +294,7 @@ p {
     gap: 10px;
   }
   .div__cocktail__ingre {
-    max-height: 520px;
+    max-height: 400px;
   }
 
   footer {
